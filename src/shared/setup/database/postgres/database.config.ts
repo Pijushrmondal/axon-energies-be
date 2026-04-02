@@ -1,3 +1,4 @@
+import { join } from 'path';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 
@@ -14,10 +15,10 @@ export const getDatabaseConfig = (
     password: config.get<string>('DB_PASSWORD'),
     database: config.get<string>('DB_NAME'),
 
-    // Never auto-sync schema — use migrations exclusively
-    synchronize: false,
+    synchronize: true,
 
-    // Entities are auto-registered via TypeOrmModule.forFeature() in each module
+    // Load all entities directly from the schema folder
+    entities: [join(__dirname, '..', 'schema', '*.entity{.ts,.js}')],
     autoLoadEntities: true,
 
     // SSL: required for AWS RDS in production

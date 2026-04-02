@@ -20,7 +20,7 @@ export const AppDataSource = new DataSource({
   ssl: isProduction ? { rejectUnauthorized: false } : false,
 
   // Source-level paths — used by TypeORM CLI via ts-node
-  entities: ['src/**/*.entity.ts'],
+  entities: ['src/shared/setup/database/schema/*.entity.ts'],
   migrations: ['src/shared/setup/database/migrations/*.ts'],
   migrationsTableName: 'typeorm_migrations',
 
